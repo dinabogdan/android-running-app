@@ -8,4 +8,13 @@
 
     <dimen name="route_reclycerview_row_margin">5dp</dimen>
     <dimen name="route_recyclerview_tv_padding">10dp</dimen>
+
+    <dimen name="relative_layout_padding_bottom">30dp</dimen>
+    <dimen name="relative_layout_padding_start">10dp</dimen>
+
+    <dimen name="linear_layout_padding_start">10dp</dimen>
+
+    <dimen name="til_routeName_marginTop">10dp</dimen>
+
+    <dimen name="tiet_routeName_paddingStart">10dp</dimen>
 </resources>

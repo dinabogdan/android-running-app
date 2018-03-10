@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">android-running-app</string>
+    <string name="app_name">My Daily Router</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
 
     <string name="hint_route_name">Route Name:</string>
+    <string name="btn_start_text">Start</string>
+    <string name="btn_stop_text">Stop</string>
 </resources>
