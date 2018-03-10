@@ -8,4 +8,8 @@
     <string name="hint_route_name">Route Name:</string>
     <string name="btn_start_text">Start</string>
     <string name="btn_stop_text">Stop</string>
+
+    //Error messages
+    <string name="route_name_not_complete_errorMsg">Please enter a Route Name!</string>
+    <string name="route_name_invalid_errorMsg">Please enter a valid Route Name!</string>
 </resources>
