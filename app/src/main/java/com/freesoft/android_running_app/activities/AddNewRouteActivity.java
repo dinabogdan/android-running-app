@@ -1,9 +1,11 @@
 package com.freesoft.android_running_app.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import com.freesoft.android_running_app.R;
 import com.freesoft.android_running_app.beans.Checkpoint;
 import com.freesoft.android_running_app.beans.Route;
+import com.freesoft.android_running_app.services.LocationService;
 
 import java.util.List;
 
@@ -45,7 +48,11 @@ public class AddNewRouteActivity extends AppCompatActivity {
                 } else if (!tietRouteName.getText().toString().matches(REGEX)) {
                     Toast.makeText(getApplicationContext(), R.string.route_name_invalid_errorMsg, Toast.LENGTH_SHORT).show();
                 } else {
+                    Log.i("### A intrat aici", "");
                     route.setRouteName(tietRouteName.getText().toString());
+                    Intent intent = new Intent(AddNewRouteActivity.this, LocationService.class);
+                    startService(intent);
+                    /*TODO: de utilizat FusedLocation ptr colectarea locatiilor*/
                 }
             }
         });

@@ -1,5 +1,6 @@
 package com.freesoft.android_running_app.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        //setup some routes; to be deleted
+        //setup some routes; TODO: to be deleted
         routes = new ArrayList<>();
         Route route1 = new Route("Traseu 1", new Date(), new Date(), new ArrayList<Checkpoint>());
         Route route2 = new Route("Traseu 2", new Date(), new Date(), new ArrayList<Checkpoint>());
@@ -60,8 +61,11 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, AddNewRouteActivity.class);
+                MainActivity.this.startActivity(intent);
+
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 
