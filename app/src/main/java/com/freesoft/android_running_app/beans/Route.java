@@ -1,5 +1,6 @@
 package com.freesoft.android_running_app.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Route {
+public class Route implements Serializable {
 
     private String routeName;
     private Date startDate;

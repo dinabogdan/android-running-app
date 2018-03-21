@@ -24,9 +24,9 @@
         <activity android:name=".activities.AddNewRouteActivity" />
 
         <service
-            android:name=".LocationService"
+            android:name=".services.LocationService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -1,9 +1,13 @@
 package com.freesoft.android_running_app.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +19,7 @@ import com.freesoft.android_running_app.beans.Checkpoint;
 import com.freesoft.android_running_app.beans.Route;
 import com.freesoft.android_running_app.services.LocationService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,10 +54,12 @@ public class AddNewRouteActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), R.string.route_name_invalid_errorMsg, Toast.LENGTH_SHORT).show();
                 } else {
                     Log.i("### A intrat aici", "");
+                    route.setStartDate(new Date());
                     route.setRouteName(tietRouteName.getText().toString());
                     Intent intent = new Intent(AddNewRouteActivity.this, LocationService.class);
+                    intent.putExtra("ROUTE", route);
+                    LocalBroadcastManager.getInstance(AddNewRouteActivity.this).registerReceiver(broadcastReceiver, new IntentFilter("RETURN_ROUTE"));
                     startService(intent);
-                    /*TODO: de utilizat FusedLocation ptr colectarea locatiilor*/
                 }
             }
         });
@@ -60,9 +67,19 @@ public class AddNewRouteActivity extends AppCompatActivity {
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(AddNewRouteActivity.this, LocationService.class);
+                stopService(intent);
             }
         });
 
     }
+
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Route route = (Route) intent.getSerializableExtra("COMPLETED_ROUTE");
+            LocalBroadcastManager.getInstance(context).unregisterReceiver(this);
+        }
+    };
+
 }
