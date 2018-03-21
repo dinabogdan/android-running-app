@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.freesoft.android_running_app.R;
 import com.freesoft.android_running_app.beans.Checkpoint;
 import com.freesoft.android_running_app.beans.Route;
+import com.freesoft.android_running_app.database.DataBase;
 import com.freesoft.android_running_app.services.LocationService;
 
 import java.util.Date;
@@ -54,7 +55,7 @@ public class AddNewRouteActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), R.string.route_name_invalid_errorMsg, Toast.LENGTH_SHORT).show();
                 } else {
                     Log.i("### A intrat aici", "");
-                    route.setStartDate(new Date());
+                    route.setStartDate(new Date().toString());
                     route.setRouteName(tietRouteName.getText().toString());
                     Intent intent = new Intent(AddNewRouteActivity.this, LocationService.class);
                     intent.putExtra("ROUTE", route);
@@ -78,7 +79,10 @@ public class AddNewRouteActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             Route route = (Route) intent.getSerializableExtra("COMPLETED_ROUTE");
+            DataBase dataBase = DataBase.getInstance(context);
+            dataBase.getRouteService().save(route);
             LocalBroadcastManager.getInstance(context).unregisterReceiver(this);
+            finish();
         }
     };
 

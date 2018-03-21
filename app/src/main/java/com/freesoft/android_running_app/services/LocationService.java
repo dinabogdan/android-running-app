@@ -64,7 +64,7 @@ public class LocationService extends Service {
         super.onDestroy();
         locationProviderClient.removeLocationUpdates(locationCallBack);
         route.setCheckpointsList(checkpoints);
-        route.setStopDate(new Date());
+        route.setStopDate(new Date().toString());
         Intent intent = new Intent("RETURN_ROUTE");
         intent.putExtra("COMPLETED_ROUTE", route);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);

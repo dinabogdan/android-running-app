@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import com.freesoft.android_running_app.R;
 import com.freesoft.android_running_app.beans.Checkpoint;
 import com.freesoft.android_running_app.beans.Route;
+import com.freesoft.android_running_app.database.DataBase;
 import com.freesoft.android_running_app.recyclerview.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;
@@ -45,15 +46,8 @@ public class MainActivity extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        //setup some routes; TODO: to be deleted
-        routes = new ArrayList<>();
-        Route route1 = new Route("Traseu 1", new Date(), new Date(), new ArrayList<Checkpoint>());
-        Route route2 = new Route("Traseu 2", new Date(), new Date(), new ArrayList<Checkpoint>());
-        Route route3 = new Route("Traseu 3", new Date(), new Date(), new ArrayList<Checkpoint>());
-        routes.add(route1);
-        routes.add(route2);
-        routes.add(route3);
-
+        DataBase dataBase = DataBase.getInstance(this);
+        routes = dataBase.getRouteService().getRoutes();
         recyclerAdapter = new RecyclerAdapter(routes);
         recyclerView.setAdapter(recyclerAdapter);
 
@@ -63,9 +57,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddNewRouteActivity.class);
                 MainActivity.this.startActivity(intent);
-
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
             }
         });
 
